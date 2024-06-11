@@ -1,0 +1,41 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import moment from 'moment';
+import sharp from 'sharp';
+
+export async function POST(req: NextRequest) {
+  const data = await req.formData();
+  const file: File | null = data.get('file') as unknown as File;
+
+  const client = new S3Client({
+    region: 'ap-northeast-2',
+    credentials: {
+      accessKeyId: process.env.ACCESS_KEY_ID!,
+      secretAccessKey: process.env.SECRET_ACCCESS_KEY!,
+    },
+  });
+
+  const originalFilename = file.name.replaceAll('_', '');
+  const updateFileName = `${moment().format('YYYYMMDDHHmm')}${originalFilename.trim()}`;
+  const fileName = updateFileName.split('.')[0];
+
+  if (!file) {
+    throw new Error('파일 업로드 실패');
+  } else {
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const body = await sharp(buffer).webp().toBuffer();
+
+    const command = new PutObjectCommand({
+      Bucket: process.env.S3_BUCKET,
+      Key: fileName,
+      Body: body,
+    });
+
+    await client.send(command);
+
+    return NextResponse.json({
+      url: `https://${process.env.S3_BUCKET}/${fileName}`,
+    });
+  }
+}
