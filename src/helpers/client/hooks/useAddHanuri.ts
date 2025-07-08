@@ -40,7 +40,8 @@ export function useAddHanuri({ id }: Props) {
   const [body, setBody] = useState('');
   const [tags, setTags] = useState<Array<string>>([]);
   const [thumbnail, setThumbnail] = useState('');
-  const [year, setYear] = useState('2024');
+  const [year, setYear] = useState('2025');
+  const [date, setDate] = useState('');
 
   // Data Query
   const { data } = useQuery({
@@ -102,6 +103,10 @@ export function useAddHanuri({ id }: Props) {
     setYear(e.target.value);
   };
 
+  const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
+    setDate(e.target.value);
+  };
+
   const onAddHanuri = async (e: SyntheticEvent) => {
     e.preventDefault();
 
@@ -113,6 +118,7 @@ export function useAddHanuri({ id }: Props) {
           tags,
           thumbnail,
           year,
+          date,
         },
         {
           onSuccess: (data) => {
@@ -130,6 +136,7 @@ export function useAddHanuri({ id }: Props) {
             tags,
             thumbnail,
             year,
+            date,
           },
         },
         {
@@ -148,6 +155,7 @@ export function useAddHanuri({ id }: Props) {
       setTags(data.tags);
       setThumbnail(data.thumbnail);
       setYear(data.year);
+      setDate(data.date || '');
     }
   }, [data]);
 
@@ -157,11 +165,13 @@ export function useAddHanuri({ id }: Props) {
     thumbnail,
     tags,
     year,
+    date,
     onChangeTitle,
     onChangeBody,
     onChangeThumbnail,
     onChangeTags,
     onChangeYear,
+    onChangeDate,
     onAddHanuri,
   };
 }

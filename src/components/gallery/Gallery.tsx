@@ -68,7 +68,7 @@ export function Gallery({ hanuri, onReadHanuri, index }: Props) {
       >
         <div>
           <div className="inline-flex items-center justify-center px-3.5 py-0.5 text-sm -rotate-1 bg-purple-200 text-purple-700 font-medium leading-6 align-top rounded-xl">
-            {new Date(hanuri.createdAt).toLocaleDateString()}
+            {hanuri.date ? new Date(hanuri.date).toLocaleDateString() : new Date(hanuri.createdAt).toLocaleDateString()}
           </div>
         </div>
         <h4 className="mt-4 text-2xl font-bold text-purple-900 xl:text-3xl lg:text-2xl sm:text-3xl lg:leading-tight xl:leading-tight h-[56px] flex flex-col justify-center whitespace-pre-line break-keep">

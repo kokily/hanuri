@@ -25,6 +25,7 @@ model Hanuri {
   tags      String[]
   thumbnail String
   year      String
+  date      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

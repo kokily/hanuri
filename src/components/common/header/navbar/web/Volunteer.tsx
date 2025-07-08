@@ -56,6 +56,7 @@ export function Volunteer({ pathname }: Props) {
                 'bg-white border shadow-lg left-1/2 border-gray-50 rounded-2xl',
               )}
             >
+              <VolunteerItem year="2025" pathname={pathname} />
               <VolunteerItem year="2024" pathname={pathname} />
               <VolunteerItem year="2023" pathname={pathname} />
               <VolunteerItem year="2022" pathname={pathname} />

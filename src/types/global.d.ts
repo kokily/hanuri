@@ -31,6 +31,7 @@ declare global {
     tags: string[];
     thumbnail: string;
     year: string;
+    date: string;
   }
 
   interface ListHanuriesQuery {
@@ -44,6 +45,7 @@ declare global {
     body: string;
     tags: string[];
     year: string;
+    date: string;
     thumbnail: string;
     createdAt: string;
     updatedAt: string;
@@ -61,11 +63,13 @@ declare global {
     thumbnail: string;
     tags: Array<string>;
     year: string;
+    date: string;
     onChangeTitle: (e: ChangeEvent<HTMLTextAreaElement>) => void;
     onChangeBody: (text: string) => void;
     onChangeThumbnail: () => void;
     onChangeTags: (nextTags: Array<string>) => void;
     onChangeYear: (e: ChangeEvent<HTMLSelectElement>) => void;
+    onChangeDate: (e: ChangeEvent<HTMLInputElement>) => void;
     onAddHanuri: (e: SyntheticEvent) => void;
   }
 

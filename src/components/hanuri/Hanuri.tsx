@@ -15,7 +15,7 @@ export function Hanuri({ hanuri }: Props) {
             id={hanuri.id}
             title={hanuri.title}
             tags={hanuri.tags}
-            date={hanuri.createdAt}
+            date={hanuri.date}
           />
           <HanuriThumbnail thumbnail={hanuri.thumbnail} />
           <HanuriBody body={hanuri.body} title={hanuri.title} />
