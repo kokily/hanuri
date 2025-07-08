@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     region: 'ap-northeast-2',
     credentials: {
       accessKeyId: process.env.ACCESS_KEY_ID!,
-      secretAccessKey: process.env.SECRET_ACCCESS_KEY!,
+      secretAccessKey: process.env.SECRET_ACCESS_KEY!,
     },
   });
 
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     const command = new PutObjectCommand({
       Bucket: process.env.S3_BUCKET,
-      Key: fileName,
+      Key: fileName, 
       Body: body,
     });
 
