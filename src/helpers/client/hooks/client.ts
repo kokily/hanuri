@@ -8,4 +8,12 @@ const client = axios.create({
   withCredentials: true,
 });
 
+client.interceptors.request.use((config) => {
+  if (config.data instanceof FormData) {
+    // FormData일 때는 Content-Type을 삭제
+    delete config.headers['Content-Type'];
+  }
+  return config;
+});
+
 export { client };
