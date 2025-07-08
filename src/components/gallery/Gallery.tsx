@@ -8,6 +8,17 @@ const hanuriColors = [
   'bg-teal-50',
 ];
 
+function formatTitle(title: string): string {
+  // 15자 이상이면 가장 가까운 공백에서 줄바꿈, 없으면 강제 줄바꿈
+  if (title.length <= 15) return title;
+  const idx = title.slice(0, 15).lastIndexOf(' ');
+  if (idx > 0) {
+    return title.slice(0, idx) + '\n' + title.slice(idx + 1);
+  } else {
+    return title.slice(0, 15) + '\n' + title.slice(15);
+  }
+}
+
 interface Props {
   hanuri: HanuriType;
   onReadHanuri: (id: string) => void;
@@ -60,8 +71,8 @@ export function Gallery({ hanuri, onReadHanuri, index }: Props) {
             {new Date(hanuri.createdAt).toLocaleDateString()}
           </div>
         </div>
-        <h4 className="mt-4 text-2xl font-bold text-purple-900 xl:text-3xl lg:text-2xl sm:text-3xl lg:leading-tight xl:leading-tight">
-          {hanuri.title}
+        <h4 className="mt-4 text-2xl font-bold text-purple-900 xl:text-3xl lg:text-2xl sm:text-3xl lg:leading-tight xl:leading-tight h-[56px] flex flex-col justify-center whitespace-pre-line break-keep">
+          {formatTitle(hanuri.title)}
         </h4>
       </div>
     </div>

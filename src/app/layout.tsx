@@ -64,6 +64,11 @@ export default function RootLayout({
       />
       <Script
         async
+        src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        async
         src="https://www.googletagmanager.com/gtag/js?id=G-BKE2LHPQG3"
       />
       <Script id="google-analytics">

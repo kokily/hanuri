@@ -19,3 +19,25 @@
 .h4 {
   @apply text-2xl font-bold leading-tight tracking-tight sm:text-3xl sm:leading-tighter;
 }
+
+/* Masonry Layout */
+.my-masonry-grid {
+  display: flex;
+  margin-left: -1rem; /* gutter size offset */
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 1rem; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Optional: different gutter size on mobile */
+@media (max-width: 800px) {
+  .my-masonry-grid {
+    margin-left: -0.5rem; /* gutter size offset */
+  }
+  .my-masonry-grid_column {
+    padding-left: 0.5rem; /* gutter size */
+  }
+}
