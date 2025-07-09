@@ -92,7 +92,7 @@ export function HanuriBody(props: Props) {
                     href={imageSrc}
                     className="gallery-item block"
                     data-src={imageSrc}
-                    data-sub-html={props.title}
+                    data-sub-html={`[${props.title}] ${index + 1}/${images.length}`}
                     onClick={e => e.preventDefault()}
                   >
                     <img
