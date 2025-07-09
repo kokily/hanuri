@@ -46,28 +46,31 @@ export function HanuriBody(props: Props) {
     if (images.length > 0 && galleryRef.current) {
       (async () => {
         const lg = (await import('lightgallery')).default;
-        lightGalleryInstance = lg(galleryRef.current!, {
-          selector: '.gallery-item',
-          download: false,
-          counter: true,
-          enableDrag: true,
-          enableSwipe: true,
-          speed: 500,
-          thumbnail: true,
-          zoom: true,
-        });
+        
+        // Masonry가 완전히 렌더링된 후 LightGallery 초기화
+        setTimeout(() => {
+          lightGalleryInstance = lg(galleryRef.current!, {
+            selector: '.gallery-item',
+            download: false,
+            counter: true,
+            enableDrag: true,
+            enableSwipe: true,
+            speed: 500,
+            thumbnail: true,
+            zoom: true,
+            dynamic: true,
+            dynamicEl: images.map((imageSrc, index) => ({
+              src: imageSrc,
+              subHtml: `[${props.title}] ${index + 1}/${images.length}`,
+            })),
+          });
+        }, 100);
       })();
     }
     return () => {
       if (lightGalleryInstance) lightGalleryInstance.destroy && lightGalleryInstance.destroy();
     };
-  }, [images]);
-
-  const breakpointColumns = {
-    default: 2,
-    1100: 2,
-    700: 1,
-  };
+  }, [images, props.title]);
 
   return (
     <div className="flex justify-center">
@@ -82,7 +85,11 @@ export function HanuriBody(props: Props) {
         {images.length > 0 && (
           <div className="mt-8" ref={galleryRef}>
             <Masonry
-              breakpointCols={breakpointColumns}
+              breakpointCols={{
+                default: 2,
+                1100: 2,
+                700: 1,
+              }}
               className="my-masonry-grid"
               columnClassName="my-masonry-grid_column"
             >
@@ -93,6 +100,7 @@ export function HanuriBody(props: Props) {
                     className="gallery-item block"
                     data-src={imageSrc}
                     data-sub-html={`[${props.title}] ${index + 1}/${images.length}`}
+                    data-index={index}
                     onClick={e => e.preventDefault()}
                   >
                     <img
