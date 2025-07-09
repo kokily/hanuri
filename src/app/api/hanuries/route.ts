@@ -17,9 +17,10 @@ export async function GET(req: NextRequest) {
     cursor: cursorObj,
     skip: cursor !== '' ? 1 : 0,
     take: limit,
-    orderBy: {
-      createdAt: 'desc',
-    },
+    orderBy: [
+      { date: 'desc' },
+      { createdAt: 'desc' },
+    ],
   });
 
   return NextResponse.json(hanuries);
