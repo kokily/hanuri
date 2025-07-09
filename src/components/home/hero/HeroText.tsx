@@ -35,7 +35,7 @@ export function HeroText() {
           />
         </Button>
         <Button
-          href="/gallery/2024"
+          href="/gallery/2025"
           variant="secondary"
           className="mt-6 sm:mt-0 sm:ml-6"
           size="lg"
