@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 
 interface Props {
   id: string;
-  date: string;
+  date?: string;
+  createdAt: string;
   title: string;
   tags: string[];
 }
@@ -13,18 +14,21 @@ interface Props {
 export function HanuriHeader(props: Props) {
   const router = useRouter();
   const { status } = useSession();
-  const target = new Date(props.date);
-  const targetDate = `${target.getFullYear()}. ${
-    target.getMonth() + 1
-  }. ${target.getDate()}.`;
+  const dateValue = props.date || props.createdAt;
+  const target = new Date(dateValue);
+  const targetDate = !isNaN(target.getTime())
+    ? `${target.getFullYear()}. ${target.getMonth() + 1}. ${target.getDate()}.`
+    : '';
 
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="w-full max-w-[1200px] mx-auto px-2 sm:px-4">
       <div className="relative">
         <div className="flex justify-center">
-          <span className="inline-block px-4 py-2 font-medium text-purple-700 bg-purple-200 rounded-full shadow-md -rotate-1">
-            {targetDate}
-          </span>
+          {targetDate && (
+            <span className="inline-block px-4 py-2 font-medium text-purple-700 bg-purple-200 rounded-full shadow-md -rotate-1">
+              {targetDate}
+            </span>
+          )}
         </div>
         <h2 className="max-w-3xl mx-auto mt-4 text-center text-purple-900 h3 md:h2">
           {props.title}

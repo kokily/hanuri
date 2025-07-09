@@ -71,7 +71,7 @@ export function HanuriBody(props: Props) {
 
   return (
     <div className="flex justify-center">
-      <div className="w-[1200px] max-w-full xl:mx-10 sm:mx-0">
+      <div className="w-full max-w-[1200px] mx-auto px-2 sm:px-4">
         {/* 텍스트 - 배경 없이, 폰트만 강조 */}
         <div className="mb-10 mt-14 sm:mt-16 lg:mt-24 text-xl sm:text-2xl leading-relaxed font-medium text-gray-900">
           <div

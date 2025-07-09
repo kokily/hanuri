@@ -55,6 +55,8 @@ declare global {
     hanuries: Array<Hanuri>;
     onReadHanuri: (id: string) => void;
     setTarget: Dispatch<SetStateAction<HTMLElement | null | undefined>>;
+    isLoading?: boolean;
+    isError?: boolean;
   }
 
   interface AddHanuriProps {

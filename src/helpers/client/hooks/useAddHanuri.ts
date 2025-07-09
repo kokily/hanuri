@@ -159,6 +159,17 @@ export function useAddHanuri({ id }: Props) {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (!id) {
+      setTitle('');
+      setBody('');
+      setTags([]);
+      setThumbnail('');
+      setYear('2025');
+      setDate('');
+    }
+  }, [id]);
+
   return {
     title,
     body,
