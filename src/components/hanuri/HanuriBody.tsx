@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useRef } from 'react';
-import Masonry from 'react-masonry-css';
 import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
@@ -15,6 +14,7 @@ export function HanuriBody(props: Props) {
   const [images, setImages] = useState<string[]>([]);
   const [textContent, setTextContent] = useState<string>('');
   const galleryRef = useRef<HTMLDivElement>(null);
+  const masonryRef = useRef<any>(null);
 
   useEffect(() => {
     // HTML에서 이미지 태그들을 추출
@@ -58,19 +58,14 @@ export function HanuriBody(props: Props) {
             speed: 500,
             thumbnail: true,
             zoom: true,
-            dynamic: true,
-            dynamicEl: images.map((imageSrc, index) => ({
-              src: imageSrc,
-              subHtml: `[${props.title}] ${index + 1}/${images.length}`,
-            })),
           });
-        }, 100);
+        }, 1000);
       })();
     }
     return () => {
       if (lightGalleryInstance) lightGalleryInstance.destroy && lightGalleryInstance.destroy();
     };
-  }, [images, props.title]);
+  }, [images]);
 
   return (
     <div className="flex justify-center">
@@ -81,27 +76,16 @@ export function HanuriBody(props: Props) {
             dangerouslySetInnerHTML={{ __html: textContent }}
           />
         </div>
-        {/* Masonry 이미지 갤러리 */}
+        {/* 이미지 갤러리 */}
         {images.length > 0 && (
           <div className="mt-8" ref={galleryRef}>
-            <Masonry
-              breakpointCols={{
-                default: 2,
-                1100: 2,
-                700: 1,
-              }}
-              className="my-masonry-grid"
-              columnClassName="my-masonry-grid_column"
-            >
+            <div className="columns-1 md:columns-2 gap-4 space-y-4">
               {images.map((imageSrc, index) => (
-                <div key={index} className="mb-4">
+                <div key={index} className="break-inside-avoid mb-4">
                   <a
-                    href={imageSrc}
                     className="gallery-item block"
                     data-src={imageSrc}
                     data-sub-html={`[${props.title}] ${index + 1}/${images.length}`}
-                    data-index={index}
-                    onClick={e => e.preventDefault()}
                   >
                     <img
                       src={imageSrc}
@@ -112,7 +96,7 @@ export function HanuriBody(props: Props) {
                   </a>
                 </div>
               ))}
-            </Masonry>
+            </div>
           </div>
         )}
       </div>
