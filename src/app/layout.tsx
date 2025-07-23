@@ -46,6 +46,10 @@ export default function RootLayout({
           name="naver-site-verification"
           content="cba244e2a17e3202fdefcc52e4a367ba48a526a0"
         />
+        <meta
+          name="google-site-verification"
+          content="QoZXLZcWfX7rpZHByrLzV6-rZho8EjuJ97ChM3AtM6c"
+        />
       </head>
       <body className={(clsx('font-sans'), roboto.className)}>
         <SessionWrapper>
