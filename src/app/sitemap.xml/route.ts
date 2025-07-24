@@ -6,7 +6,7 @@ export async function GET() {
     select: { id: true, updatedAt: true }
   });
 
-  const baseUrl = 'https://hanuri.or.kr'; // 실제 배포 도메인으로 변경 필요
+  const baseUrl = 'https://hanuri.or.kr';
   const urls = hanuries.map(
     (item) => `
       <url>

@@ -90,7 +90,7 @@ export function HanuriBody(props: Props) {
                     <img
                       src={imageSrc}
                       alt={props.title}
-                      className="w-full h-auto rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                      className="w-full h-auto rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-1"
                       loading="lazy"
                     />
                   </a>
