@@ -1,11 +1,14 @@
-import { client } from '@/helpers/client/hooks/client';
+import db from "@/helpers/server/database";
+import { Hanuri } from "@prisma/client";
+// import { client } from '@/helpers/client/hooks/client';
 
-export const getData = async (id: string): Promise<HanuriType> => {
-  const response = await client.get(`/hanuries/${id}`);
+export const getData = async (id: string): Promise<Hanuri> => {
+  // const response = await client.get(`/hanuries/${id}`);
+  const hanuri = await db.hanuri.findUnique({ where: { id } });
 
-  if (!response.data) {
+  if (!hanuri) {
     throw new Error('Failed to fetch data');
   }
 
-  return response.data;
+  return hanuri;
 };

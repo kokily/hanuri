@@ -1,3 +1,4 @@
+import { Hanuri as HanuriType } from '@prisma/client';
 import { HanuriBody } from './HanuriBody';
 import { HanuriHeader } from './HanuriHeader';
 import { HanuriThumbnail } from './HanuriThumbnail';

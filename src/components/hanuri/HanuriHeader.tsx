@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 interface Props {
   id: string;
   date?: string;
-  createdAt: string;
+  createdAt: Date;
   title: string;
   tags: string[];
 }
