@@ -34,31 +34,38 @@ export default function EditorBody(props: Props) {
 
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
+    input.setAttribute('multiple', 'multiple');
     input.click();
 
     input.addEventListener('change', async () => {
-      const file = input.files[0];
-      const formData = new FormData();
+      const files = input.files;
+      
+      if (!files || files.length === 0) return;
 
-      formData.append('file', file);
+      // 순차 업로드
+      for (const file of Array.from(files)) {
+        const formData = new FormData();
+        formData.append('file', file);
 
-      try {
-        await imageUpload(formData);
-      } catch (err: any) {
-        console.log(err);
+        try {
+          await imageUpload(formData);
+        } catch (error) {
+          console.error('이미지 업로드 실패:', error);
+        }
       }
     });
   };
 
-  const imageDragDrop = async (file: File) => {
-    const formData = new FormData();
+  const imageDragDrop = async (files: FileList | File[]) => {
+    for (const file of Array.from(files)) {
+      const formData = new FormData();
+      formData.append('file', file);
 
-    formData.append('file', file);
-
-    try {
-      await imageUpload(formData);
-    } catch (err) {
-      console.log(err);
+      try {
+        await imageUpload(formData);
+      } catch (error) {
+        console.error('이미지 업로드 실패: ', error);
+      }
     }
   };
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 interface Props {
-  onDragDropUpload: (file: File) => void;
+  onDragDropUpload: (files: FileList | File[]) => void;
 }
 
 export function DragDrop({ onDragDropUpload }: Props) {
@@ -15,10 +15,9 @@ export function DragDrop({ onDragDropUpload }: Props) {
 
       const { files } = e.dataTransfer || { files: null };
 
-      if (!files) return;
-      if (!files[0]) return;
+      if (!files || files.length === 0) return;
 
-      onDragDropUpload(files[0]);
+      onDragDropUpload(files);
       dragIndex.current = 0;
       setDragging(false);
 

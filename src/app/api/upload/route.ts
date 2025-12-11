@@ -18,19 +18,26 @@ export async function POST(req: NextRequest) {
   
     const originalFilename = file.name.replaceAll('_', '');
     const updateFileName = `${moment().format('YYYYMMDDHHmm')}${originalFilename.trim()}`;
-    const fileName = updateFileName.split('.')[0];
+    const fileNameWithoutExt = updateFileName.split('.')[0];
+    const fileName = `${fileNameWithoutExt}.webp`;
   
     if (!file) {
       throw new Error('파일 업로드 실패');
     } else {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
-      const body = await sharp(buffer).webp().toBuffer();
+      const body = await sharp(buffer)
+        .webp({
+          quality: 85,
+          effort: 6,
+        })
+        .toBuffer();
   
       const command = new PutObjectCommand({
         Bucket: process.env.S3_BUCKET,
         Key: fileName, 
         Body: body,
+        ContentType: 'image/webp',
       });
   
       await client.send(command);
