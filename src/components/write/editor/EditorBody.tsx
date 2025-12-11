@@ -15,18 +15,25 @@ export default function EditorBody(props: Props) {
   const quillRef = useRef(null);
 
   const imageUpload = async (formData: FormData) => {
-    const response = await client.post<{ url: string }>(`/upload`, formData);
+    try {
+      const response = await client.post<{ url: string }>(`/upload`, formData);
 
-    if (!response.data) {
-      alert('upload Failed');
+      if (!response.data) {
+        alert('upload Failed');
+      }
+  
+      const { url } = response.data;
+      const editor = quillRef.current.getEditor();
+      const range = editor.getSelection(true);
+  
+      // Range가 없을 때 문서 끝에 삽입
+      const insertIndex = range ? range.index : editor.getLength() - 1;
+  
+      editor.insertEmbed(insertIndex, 'image', `${url}`);
+      editor.setSelection(insertIndex + 1, 0); 
+    } catch (error) {
+      console.error('이미지 업로드 실패: ', error);
     }
-
-    const { url } = response.data;
-    const editor = quillRef.current.getEditor();
-    const range = editor.getSelection();
-
-    editor.insertEmbed(range.index, 'image', `${url}`);
-    editor.setSelection(range.index + 1);
   };
 
   const imageHandler = () => {
