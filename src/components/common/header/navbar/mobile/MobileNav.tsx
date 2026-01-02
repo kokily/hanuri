@@ -73,6 +73,7 @@ export function MobileNav({ list }: Props) {
                       'sm:justify-items-start sm:grid-cols-2 sm:gap-x-8',
                     )}
                   >
+                    <Volunteer year="2026" close={() => close()} />
                     <Volunteer year="2025" close={() => close()} />
                     <Volunteer year="2024" close={() => close()} />
                     <Volunteer year="2023" close={() => close()} />
