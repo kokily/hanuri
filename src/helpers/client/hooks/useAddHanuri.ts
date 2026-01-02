@@ -40,7 +40,7 @@ export function useAddHanuri({ id }: Props) {
   const [body, setBody] = useState('');
   const [tags, setTags] = useState<Array<string>>([]);
   const [thumbnail, setThumbnail] = useState('');
-  const [year, setYear] = useState('2025');
+  const [year, setYear] = useState('2026');
   const [date, setDate] = useState('');
 
   // Data Query
