@@ -11,3 +11,11 @@ export const GALLERY_YEARS = [
 export type GalleryYear = (typeof GALLERY_YEARS)[number];
 
 export const LATEST_GALLERY_YEAR = GALLERY_YEARS[0];
+
+export type GalleryCardItem = {
+  id: string;
+  title: string;
+  thumbnail: string;
+  date: string | null;
+  createdAt: Date;
+};
